@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #define BOARDSTATUS_OK   1
 #define BOARDSTATUS_NOK   0 //메인함수에 알려야함 
+#define N_BOARD   15
 
 //보드초기화 
 int board_initBoard(void);
