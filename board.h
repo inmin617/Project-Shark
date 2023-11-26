@@ -17,7 +17,7 @@ int board_getBoardCoin(int pos);
 int board_sharkposition(void);
 
 //상어 전진 명령 
-int board_moveshark(void);
+int board_stepShark(void);
 
 //특정 칸의 파손 여부 출력 
 int board_getBoardStatus(int pos);

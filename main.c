@@ -15,7 +15,7 @@ int player_position[N_PLAYER];
 char player_name[N_PLAYER][MAX_CHARNAME];
 int player_coin[N_PLAYER];
 int player_status[N_PLAYER];
-char player_statusString[3][MAX_CHARNAME] = ("LIVE", "DIE", "END");
+char player_statusString[3][MAX_CHARNAME] = {"LIVE", "DIE", "END"};
 
 void opening(void)
 {
@@ -53,7 +53,7 @@ void printPlayerStatus(void)
 	int i;
 	for(i=0; i<N_PLAYER; i++)
 	{
-		printf("%s: pos %i, coin %i, status: %s\n", player_name[], player_position[i], player_coint[i], player_statusString[player_status[i]]);
+		printf("%s: pos %i, coin %i, status: %s\n", player_name[i], player_position[i], player_coin[i], player_statusString[player_status[i]]);
 	}
 	printf("------------------------\n");
 }
@@ -184,15 +184,15 @@ int main(int argc, char *argv[]) {
 		printf("%s moved to %i\n", player_name[turn], player_position[turn]);
 		
 		//2.4.코인얻기 
-		cointResult=board_getBoardCoin(turn);
+		coinResult=board_getBoardCoin(player_position[turn]);
 		player_coin[turn]+=coinResult;
-		printf("coin")
+		printf("coin");
 		
 		//2.5.다음턴 
 		if (player_status[turn] == PLAYERSTATUS_END)
-	 		printf("%s reached to the end!\n", player_name[turn]);
+	 	printf("%s reached to the end!\n", player_name[turn]);
 	 		
-		turn=(turn+1);%N_PLAYER; // wrap around 
+		turn=(turn+1)%N_PLAYER; // wrap around 
 		
 		
 		//2.6.상어동작(조건: 모든플레이어 한번씩 턴 지난후) 
@@ -211,8 +211,15 @@ int main(int argc, char *argv[]) {
 		
 		}
 		
-	}while(game-end()==0);
+	}while(game_end()==0);
 	
 	//3.게임 끝(승자계산, 출력) 
+	
+	result_alive = getAlivePlayer();
+	result_winner = getWinner();
+	printf("GAME END!\n");
+	printf("%i players are alive! winner is %s\n", result_alive, player_name[result_winner]);
+	printf("Congratuation %s !!\n", player_name[result_winner]);
+	
 	return 0;
 }
